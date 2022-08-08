@@ -8,13 +8,13 @@ import { Router } from '@layer0/core/router'
 
 export default new Router()
   // send any unmatched request to origin
-  .fallback(({ serveStatic, cache, compute }) => {
-    cache({
-      edge: {
-        maxAgeSeconds: 2,
-        staleWhileRevalidateSeconds: 10
-      }
-    })
+  .fallback(({ serveStatic, compute }) => {
+    // cache({
+    //   edge: {
+    //     maxAgeSeconds: 2,
+    //     staleWhileRevalidateSeconds: 10
+    //   }
+    // })
     serveStatic('index.html', {
       onNotFound: async () => await compute((req, res) => {
         res.body= new Date().toString()
